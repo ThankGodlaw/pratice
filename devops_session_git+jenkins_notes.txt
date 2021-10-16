@@ -1,0 +1,376 @@
+
+-----
+Create a new repository on the command line and push it to Github Remote repository
+-----
+
+mkdir local-devops-project
+cd local-devops-project
+echo "# sample" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+
+The create a remote ropistory on Github account with the same name as the local repository
+git branch -M main
+git remote add origin https://github.com/insighttechworld/sample.git
+git push -u origin main
+
+git 
+
+-------Working as another Developer or Ops
+
+git clone https://github.com/insighttechworld/local-devops-project.git
+cd local-devops-project/
+ls -la
+git config user.name "mouse mouse"
+git config user.email "mouse@email.com"
+git config --list
+   13  git branch
+   14  git branch feature1
+   15  git branch
+   16  git checkout feature1
+   17  git branch
+   20  touch mouse_file
+   21  touch feature1.html
+   22  vi feature1.html
+   23  cat feature1.html
+<!DOCTYPE html>
+<html>
+<body>
+
+
+<h1>My First Heading</h1>
+<p>My first paragraph.</p>
+
+</body>
+</html>
+
+   25  git status
+   26  git add .
+   27  git commit -m "new features added"
+   28  git log
+   29  git status
+   30  git push -u origin feature1
+
+
+---------Working as third developer
+
+    3  git clone https://github.com/insighttechworld/local-devops-project.git
+    4  ls -la
+    5  ls -l
+    6  cd local-devops-project/
+    7  ls -l
+    8  cat README.md
+    9  vi README.md
+   10  touch appserver.py
+   11  vi appserver.py
+   12  history
+$ cat appserver.py
+# Solve the quadratic equation ax**2 + bx + c = 0
+
+# import complex math module
+import cmath
+
+a = 1
+b = 5
+c = 6
+
+# calculate the discriminant
+d = (b**2) - (4*a*c)
+
+# find two solutions
+sol1 = (-b-cmath.sqrt(d))/(2*a)
+sol2 = (-b+cmath.sqrt(d))/(2*a)
+
+
+
+
+
+----------
+Continuous Integration with Jenkins
+----------
+
+Jenkins Setup
+
+   25  nmtui
+   26  cat /etc/hosts
+   27  cat /etc/resolv.conf
+
+https://www.jenkins.io/
+
+
+
+JENKINS INSTALLATION SCRIPT
+-----------------------------------------------
+
+#!/bin/bash
+#
+#Description: Jenkins   Installation and Setup on CentOS 7
+#
+#Author: Olufemi Amosu
+#
+#Date: June 2020
+#
+#Modified: January 2021
+#===========================================================
+               
+clear
+     
+echo
+            
+echo "Installation of   Java in progress...please wait"
+            
+echo
+         
+sleep 5
+      
+yum install   java-1.8.0-openjdk-devel -y
+        
+echo -e "\n make sure   Java 8 is the default Java version\n"
+            
+echo -e "\n The next step   is to enable the Jenkins repository...please wait \n"
+            
+sleep 7
+      
+curl --silent --location   http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo | sudo tee /etc/yum.repos.d/jenkins.repo
+sudo wget -O   /etc/yum.repos.d/jenkins.repo \
+      https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+sudo yum upgrade -y
+sudo yum install jenkins   java-1.8.0-openjdk-devel -y
+sudo systemctl daemon-reload
+sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+         
+clear
+      
+echo
+            
+echo "now installing   Jenkins, this may take a little while, please wait..."
+          
+sleep 7
+        
+yum -y install jenkins
+            
+echo
+  
+echo
+            
+#After the installation   process is completed, start the Jenkins service
+       
+systemctl start jenkins
+         
+systemctl status jenkins
+ 
+sleep 8
+        
+sudo systemctl enable Jenkins
+        
+#Adjust the Firewall
+            
+#If you are installing Jenkins   on a remote CentOS server that is protected by a firewall you need to open port   8080.
+       
+sudo firewall-cmd --permanent   --zone=public --add-port=8080/tcp
+       
+sudo firewall-cmd --reload
+             
+#Setting Up Jenkins
+  
+echo “Setting Up   Jenkins…please wait”
+            
+sleep 5
+            
+echo 
+  
+echo -e "\nTo set up your   new Jenkins installation, open your browser and type your domain or IP   address followed by port 8080\n"
+            
+echo   "http://your_ip_or_domain:8080"
+            
+sleep 5
+ 
+echo
+echo
+echo "Use this link to   access your jenkins server. http://$(ifconfig |grep Bcast |awk '{print $2}'   |awk -F":" '{print $2}'):8080"
+echo
+sleep 7
+echo
+echo
+echo "cat /var/lib/jenkins/secrets/initialAdminPassword"
+echo
+echo "You should see a   32-character long alphanumeric password as shown below:"
+echo   "2115173b548f4e99a203ee99a8732a32"
+echo "Copy the password   from your terminal, paste it into the Administrator password field and click   Continue"
+echo
+echo "Thank you!"
+echo
+echo
+echo "          Please use this link to access your   jenkins server: http://$(ifconfig | head -2 | grep inet | awk '{print   $2}'):8080"
+echo
+echo
+sleep 7
+            
+ 
+            
+yum -y install jenkins
+            
+echo
+  
+echo
+            
+#After the installation   process is completed, start the Jenkins service
+          
+systemctl start jenkins
+systemctl status jenkins
+sleep 8         
+sudo systemctl enable Jenkins
+          
+#Adjust the Firewall
+            
+#If you are installing Jenkins   on a remote CentOS server that is protected by a firewall you need to open port   8080.
+       
+sudo firewall-cmd --permanent   --zone=public --add-port=8080/tcp
+     
+sudo firewall-cmd --reload
+     
+#Setting Up Jenkins
+  
+echo “Setting Up   Jenkins…please wait”
+            
+sleep 5
+            
+echo 
+  
+echo -e "\nTo set up your   new Jenkins installation, open your browser and type your domain or IP   address followed by port 8080\n"
+            
+echo   "http://your_ip_or_domain:8080"
+            
+sleep 5
+            
+ 
+  
+echo
+  
+echo
+            
+echo "Use this link to   access your jenkins server. http://$(ifconfig |grep Bcast |awk '{print $2}'   |awk -F":" '{print $2}'):8080"
+            
+echo
+     
+sleep 7
+       
+echo
+            
+echo
+            
+echo "cat /var/lib/jenkins/secrets/initialAdminPassword"
+            
+echo
+            
+echo "You should see a   32-character long alphanumeric password as shown below:"
+            
+echo   "2115173b548f4e99a203ee99a8732a32"
+            
+echo "Copy the password   from your terminal, paste it into the Administrator password field and click   Continue"
+            
+echo
+            
+echo "Thank you!"
+echo
+echo
+echo "          Please use this link to access your   jenkins server: http://$(ifconfig | head -2 | grep inet | awk '{print   $2}'):8080"
+echo 
+echo
+    
+
+
+
+ls -l /var/lib/jenkins/
+
+
+Configure Jenkins environment
+
+----
+Set Java's home
+----
+
+java -version
+# find /usr/lib/jvm/java-1.8* | head -n 3
+/usr/lib/jvm/java-1.8.0
+/usr/lib/jvm/java-1.8.0-openjdk
+/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.292.b10-1.el7_9.x86_64
+
+cd
+vi .bash_profile and insert the below right under # user specific
+JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.292.b10-1.el7_9.x86_64
+PATH=$PATH:$HOME/bin:$JAVA_HOME
+
+save and quit
+
+source .bash_profile
+
+
+---
+Set Java's home path in Jenkins
+---
+
+- Manage Jenkins
+- Global Tool COnfigurations
+- ADD JDK
+- Uncheck Install automatically
+- Type in a nave for java home JAVA_HOME
+- Paste the java home path from the command line
+- Apply & Save
+
+
+---
+Run First Jenkins Job
+---
+
+New Item
+Give your job a name "My First Jenkins Job"
+Choose Freestyle Job
+Ok
+Enter a description
+Build
+  Add buildstep
+    Execute Shell
+      then enter any shell command you like to execute like "echo "Building my first Jenkins Job"
+Apply & Save
+
+
+---
+Install and Setup Git on Jenkins
+---
+
+Let's Install and Setup Git for Jenkins Integration
+
+# yum install git -y  --> on our Jenkins server
+
+Go back to Jenkins Console/Webpage
+Need to install Git plugin
+
+- Jenkins Dashboard
+- Manage Jenkins
+- Manage Plugins
+- Choose Available
+- Type Github in the search bar
+- Scroll down to select Github and Github Integration
+- Install without restart
+
+Next is to setup Git
+- Manage Jenkins
+- Global Tool Configuration
+- Scroll to Git
+- Name: github
+  Path: git
+- Apply and Save
+
+
+
+
+CLASS PROJECT
+------
+As a developer, you are required to develope source for a webapp project name "ClockWise App", write an imaginary code using python and html to develop the code according to the client's requirement.
+
+As Operations, you are required to modify the source code byt adding project guideline in the README file of the repository and check the codes to errors, then push the code to the VCS a nd build the job using jenkins.
+
+
